@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Search, MapPin, Phone, Globe, ExternalLink, Filter } from 'lucide-react';
 import { Button, Card, Badge } from '../../components/ui/components';
