@@ -30,16 +30,16 @@ export default function PlanPage() {
   });
 
   return (
-    <div className="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-slate-950 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto space-y-8">
         
         {/* Header Actions */}
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-800">
           <div>
-            <h1 className="text-2xl font-bold text-slate-900">
+            <h1 className="text-2xl font-bold text-slate-100">
               {language === 'en' ? "My Home Plan" : "Mi Plan del Hogar"}
             </h1>
-            <p className="text-slate-500 text-sm">
+            <p className="text-slate-400 text-sm">
               {language === 'en' ? "Your personalized guide to action." : "Su guía personalizada para la acción."}
             </p>
           </div>
@@ -51,8 +51,8 @@ export default function PlanPage() {
           </div>
         </div>
 
-        {/* Printable Content Area */}
-        <div ref={contentRef} className="bg-white p-8 md:p-12 rounded-none md:rounded-3xl shadow-sm border border-slate-100 print:shadow-none print:border-none print:p-0">
+        {/* Printable Content Area - KEEP LIGHT FOR PRINTING */}
+        <div ref={contentRef} className="bg-white text-slate-900 p-8 md:p-12 rounded-none md:rounded-3xl shadow-sm border border-slate-200 print:shadow-none print:border-none print:p-0">
           
           {/* Plan Header */}
           <div className="border-b border-slate-200 pb-8 mb-8">
@@ -95,7 +95,7 @@ export default function PlanPage() {
                     <div>
                       <div className="flex items-center gap-3 mb-1">
                         <h4 className="font-bold text-slate-900">{language === 'en' ? rec.title.en : rec.title.es}</h4>
-                        <Badge variant="outline" className="text-xs">{rec.category}</Badge>
+                        <Badge variant="outline" className="text-xs border-slate-300 text-slate-600">{rec.category}</Badge>
                       </div>
                       <p className="text-slate-600 text-sm mb-2">
                         {language === 'en' ? rec.description.en : rec.description.es}
