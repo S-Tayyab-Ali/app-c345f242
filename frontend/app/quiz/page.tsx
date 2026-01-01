@@ -38,8 +38,6 @@ export default function QuizPage() {
 
   const handleOptionSelect = (value: string | boolean) => {
     updateQuizResponse(currentQuestion.id, value);
-    // Auto-advance for boolean/single choice for smoother UX
-    // But maybe wait a tiny bit so they see the selection
     setTimeout(() => {
       handleNext();
     }, 300);
@@ -61,17 +59,17 @@ export default function QuizPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-slate-950 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-2xl mx-auto">
         {/* Progress Bar */}
         <div className="mb-8">
-          <div className="flex justify-between text-sm font-medium text-slate-500 mb-2">
+          <div className="flex justify-between text-sm font-medium text-slate-400 mb-2">
             <span>{language === 'en' ? 'Question' : 'Pregunta'} {currentQuestionIndex + 1} / {QUIZ_QUESTIONS.length}</span>
             <span>{Math.round(progress)}%</span>
           </div>
-          <div className="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+          <div className="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden">
             <motion.div 
-              className="bg-teal-600 h-2.5 rounded-full"
+              className="bg-teal-500 h-2.5 rounded-full"
               initial={{ width: 0 }}
               animate={{ width: `${progress}%` }}
               transition={{ duration: 0.5 }}
@@ -80,7 +78,7 @@ export default function QuizPage() {
         </div>
 
         {/* Question Card */}
-        <Card className="p-8 md:p-12 min-h-[400px] flex flex-col justify-center relative overflow-hidden">
+        <Card className="p-8 md:p-12 min-h-[400px] flex flex-col justify-center relative overflow-hidden bg-slate-900/80 border-slate-800">
           <AnimatePresence mode='wait' custom={direction}>
             <motion.div
               key={currentQuestion.id}
@@ -92,7 +90,7 @@ export default function QuizPage() {
               transition={{ duration: 0.3 }}
               className="w-full"
             >
-              <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-8 leading-tight">
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-8 leading-tight">
                 {language === 'en' ? currentQuestion.text.en : currentQuestion.text.es}
               </h2>
 
@@ -103,21 +101,21 @@ export default function QuizPage() {
                       onClick={() => handleOptionSelect(true)}
                       className={`p-6 rounded-xl border-2 text-lg font-medium transition-all flex items-center justify-between group
                         ${quizResponses[currentQuestion.id] === true 
-                          ? 'border-teal-600 bg-teal-50 text-teal-800' 
-                          : 'border-slate-200 hover:border-teal-300 hover:bg-slate-50 text-slate-700'}`}
+                          ? 'border-teal-500 bg-teal-950/30 text-teal-400' 
+                          : 'border-slate-700 hover:border-teal-500/50 hover:bg-slate-800 text-slate-300'}`}
                     >
                       {language === 'en' ? 'Yes' : 'Sí'}
-                      {quizResponses[currentQuestion.id] === true && <Check className="text-teal-600" />}
+                      {quizResponses[currentQuestion.id] === true && <Check className="text-teal-500" />}
                     </button>
                     <button
                       onClick={() => handleOptionSelect(false)}
                       className={`p-6 rounded-xl border-2 text-lg font-medium transition-all flex items-center justify-between group
                         ${quizResponses[currentQuestion.id] === false 
-                          ? 'border-teal-600 bg-teal-50 text-teal-800' 
-                          : 'border-slate-200 hover:border-teal-300 hover:bg-slate-50 text-slate-700'}`}
+                          ? 'border-teal-500 bg-teal-950/30 text-teal-400' 
+                          : 'border-slate-700 hover:border-teal-500/50 hover:bg-slate-800 text-slate-300'}`}
                     >
                       {language === 'en' ? 'No' : 'No'}
-                      {quizResponses[currentQuestion.id] === false && <Check className="text-teal-600" />}
+                      {quizResponses[currentQuestion.id] === false && <Check className="text-teal-500" />}
                     </button>
                   </div>
                 )}
@@ -130,11 +128,11 @@ export default function QuizPage() {
                         onClick={() => handleOptionSelect(option.value)}
                         className={`w-full p-5 rounded-xl border-2 text-left text-lg font-medium transition-all flex items-center justify-between group
                           ${quizResponses[currentQuestion.id] === option.value 
-                            ? 'border-teal-600 bg-teal-50 text-teal-800' 
-                            : 'border-slate-200 hover:border-teal-300 hover:bg-slate-50 text-slate-700'}`}
+                            ? 'border-teal-500 bg-teal-950/30 text-teal-400' 
+                            : 'border-slate-700 hover:border-teal-500/50 hover:bg-slate-800 text-slate-300'}`}
                       >
                         {language === 'en' ? option.label.en : option.label.es}
-                        {quizResponses[currentQuestion.id] === option.value && <Check className="text-teal-600" />}
+                        {quizResponses[currentQuestion.id] === option.value && <Check className="text-teal-500" />}
                       </button>
                     ))}
                   </div>
@@ -149,18 +147,15 @@ export default function QuizPage() {
           <Button 
             variant="ghost" 
             onClick={handleBack}
-            className="text-slate-500 hover:text-slate-800"
+            className="text-slate-400 hover:text-slate-100"
           >
             <ArrowLeft className="mr-2 w-5 h-5" />
             {t('btn.back')}
           </Button>
           
-          {/* Only show Next if an answer is selected, or allow skip? 
-              Requirement says "all questions optional", so we should allow Next always.
-          */}
           <Button 
             onClick={handleNext}
-            className="bg-slate-900 hover:bg-slate-800 text-white"
+            className="bg-slate-100 hover:bg-white text-slate-900"
           >
             {isLastQuestion ? (language === 'en' ? 'See Results' : 'Ver Resultados') : t('btn.next')}
             {!isLastQuestion && <ArrowRight className="ml-2 w-5 h-5" />}

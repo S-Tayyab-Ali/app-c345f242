@@ -17,10 +17,10 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', isLoading, children, ...props }, ref) => {
     const variants = {
-      primary: 'bg-teal-600 text-white hover:bg-teal-700 shadow-md hover:shadow-lg',
-      secondary: 'bg-orange-500 text-white hover:bg-orange-600 shadow-md hover:shadow-lg',
-      outline: 'border-2 border-teal-600 text-teal-700 hover:bg-teal-50',
-      ghost: 'text-slate-600 hover:bg-slate-100 hover:text-slate-900',
+      primary: 'bg-teal-500 text-slate-950 hover:bg-teal-400 shadow-md hover:shadow-lg hover:shadow-teal-500/20',
+      secondary: 'bg-orange-500 text-white hover:bg-orange-400 shadow-md hover:shadow-lg',
+      outline: 'border-2 border-teal-500 text-teal-400 hover:bg-teal-950/30',
+      ghost: 'text-slate-400 hover:bg-slate-800 hover:text-slate-200',
       danger: 'bg-red-500 text-white hover:bg-red-600',
     };
 
@@ -34,7 +34,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={cn(
-          'inline-flex items-center justify-center rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none',
+          'inline-flex items-center justify-center rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-slate-950 disabled:opacity-50 disabled:pointer-events-none',
           variants[variant],
           sizes[size],
           className
@@ -53,17 +53,17 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 Button.displayName = 'Button';
 
 export const Card = ({ className, children, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={cn("bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden", className)} {...props}>
+  <div className={cn("bg-slate-900/50 backdrop-blur-sm rounded-2xl shadow-sm border border-slate-800 overflow-hidden", className)} {...props}>
     {children}
   </div>
 );
 
 export const Badge = ({ className, variant = 'default', children }: { className?: string, variant?: 'default' | 'success' | 'warning' | 'outline', children: React.ReactNode }) => {
   const variants = {
-    default: 'bg-slate-100 text-slate-800',
-    success: 'bg-teal-100 text-teal-800',
-    warning: 'bg-orange-100 text-orange-800',
-    outline: 'border border-slate-200 text-slate-600'
+    default: 'bg-slate-800 text-slate-300',
+    success: 'bg-teal-900/30 text-teal-300 border border-teal-800',
+    warning: 'bg-orange-900/30 text-orange-300 border border-orange-800',
+    outline: 'border border-slate-700 text-slate-400'
   };
   
   return (
